@@ -36,19 +36,20 @@ Cortex Linux embeds AI at the operating system level. Tell it what you need in p
 
 ## Current Roadmap
 
-### Phase 1: Foundation (Weeks 1-4)
-- [ ] LLM integration layer (Claude/GPT-4 API wrapper)
-- [ ] Safe command execution sandbox
-- [ ] Package manager AI (apt/yum/dnf intelligent wrapper)
-- [ ] Basic hardware detection
+### Phase 1: Foundation (Weeks 1-2)
+- ✅ LLM integration layer (PR #5 by @Sahilbhatane)
+- ✅ Safe command execution sandbox (PR #6 by @dhvil)
+- ✅ Hardware detection (PR #4 by @dhvil)
+- [ ] Package manager AI wrapper
+- [ ] Basic multi-step orchestration
 
-### Phase 2: Intelligence (Weeks 5-8)
+### Phase 2: Intelligence (Weeks 2-5)
 - [ ] Dependency resolution AI
 - [ ] Configuration file generation
 - [ ] Multi-step installation orchestration
 - [ ] Error diagnosis and auto-fix
 
-### Phase 3: Enterprise (Weeks 9-12)
+### Phase 3: Enterprise (Weeks 5-9)
 - [ ] Security hardening
 - [ ] Audit logging
 - [ ] Role-based access control
