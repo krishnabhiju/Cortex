@@ -730,7 +730,7 @@ def main():
             return cli.notify(args)
                 
         elif args.command == 'stack':
-                    return cli.stack(args)
+            return cli.stack(args)
         
         else:
             parser.print_help()

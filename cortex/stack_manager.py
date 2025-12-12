@@ -18,8 +18,8 @@ from cortex.hardware_detection import has_nvidia_gpu
 class StackManager:
     """Manages pre-built package stacks with hardware awareness"""
     
-    def __init__(self):
-        # stacks. json is in the same directory as this file (cortex/)
+    def __init__(self) -> None:
+        # stacks.json is in the same directory as this file (cortex/)
         self.stacks_file = Path(__file__).parent / "stacks.json"
         self._stacks = None
     
@@ -33,7 +33,7 @@ class StackManager:
                 self._stacks = json.load(f)
             return self._stacks
         except FileNotFoundError:
-            raise FileNotFoundError(f"Stacks config not found at {self. stacks_file}")
+            raise FileNotFoundError(f"Stacks config not found at {self.stacks_file}")
         except json.JSONDecodeError:
             raise ValueError(f"Invalid JSON in {self.stacks_file}")
     
