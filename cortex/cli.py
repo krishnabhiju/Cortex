@@ -40,7 +40,7 @@ from cortex.validators import (
 )
 # Import the new Notification Manager
 from cortex.notification_manager import NotificationManager
-from cortex.stack_manager import StackManager 
+from cortex.stack_manager import StackManager
 
 class CortexCLI:
     def __init__(self, verbose: bool = False):
@@ -175,26 +175,35 @@ class CortexCLI:
             self._print_error("Unknown notify command")
             return 1
     # -------------------------------
-
     def stack(self, args: argparse.Namespace) -> int:
         """Handle `cortex stack` commands (list/describe/install/dry-run)."""
-        manager = StackManager()
-        
-        # Validate --dry-run requires a stack name
-        if args.dry_run and not args.name:
-            self._print_error("--dry-run requires a stack name (e.g., `cortex stack ml --dry-run`)")
+        try:
+            manager = StackManager()
+
+            # Validate --dry-run requires a stack name
+            if args.dry_run and not args.name:
+                self._print_error("--dry-run requires a stack name (e.g., `cortex stack ml --dry-run`)")
+                return 1
+
+            # List stacks (default when no name/describe)
+            if args.list or (not args.name and not args.describe):
+                return self._handle_stack_list(manager)
+
+            # Describe a specific stack
+            if args.describe:
+                return self._handle_stack_describe(manager, args.describe)
+
+            # Install a stack (only remaining path)
+            return self._handle_stack_install(manager, args)
+
+        except FileNotFoundError:
+            self._print_error("stacks.json not found. Make sure it exists in the expected location.")
             return 1
+        except ValueError:
+            self._print_error("stacks.json is invalid or malformed.")
+            return 1
+
         
-        # List stacks (default when no name/describe)
-        if args.list or (not args.name and not args.describe):
-            return self._handle_stack_list(manager)
-        
-        # Describe a specific stack
-        if args.describe:
-            return self._handle_stack_describe(manager, args.describe)
-        
-        # Install a stack (only remaining path)
-        return self._handle_stack_install(manager, args)
 
 
     def _handle_stack_list(self, manager: StackManager) -> int:
@@ -759,8 +768,7 @@ def main():
             return cli.edit_pref(action=args.action, key=args.key, value=args.value)
         # Handle the new notify command
         elif args.command == 'notify':
-            return cli.notify(args)
-                
+            return cli.notify(args)                
         elif args.command == 'stack':
             return cli.stack(args)
         
