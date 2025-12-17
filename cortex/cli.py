@@ -774,12 +774,16 @@ def main():
     # --------------------------
 
     # Stack command
-    stack_parser = subparsers.add_parser('stack', help='Manage pre-built package stacks')
-    stack_parser.add_argument('name', nargs='?', help='Stack name to install (ml, ml-cpu, webdev, devops, data)')
+    stack_parser = subparsers.add_parser("stack", help="Manage pre-built package stacks")
+    stack_parser.add_argument(
+        "name", nargs="?", help="Stack name to install (ml, ml-cpu, webdev, devops, data)"
+    )
     stack_group = stack_parser.add_mutually_exclusive_group()
-    stack_group.add_argument('--list', '-l', action='store_true', help='List all available stacks')
-    stack_group.add_argument('--describe', '-d', metavar='STACK', help='Show details about a stack')
-    stack_parser.add_argument('--dry-run', action='store_true', help='Show what would be installed (requires stack name)')
+    stack_group.add_argument("--list", "-l", action="store_true", help="List all available stacks")
+    stack_group.add_argument("--describe", "-d", metavar="STACK", help="Show details about a stack")
+    stack_parser.add_argument(
+        "--dry-run", action="store_true", help="Show what would be installed (requires stack name)"
+    )
     # Cache commands
     cache_parser = subparsers.add_parser("cache", help="Cache operations")
     cache_subs = cache_parser.add_subparsers(dest="cache_action", help="Cache actions")
@@ -814,7 +818,7 @@ def main():
         # Handle the new notify command
         elif args.command == "notify":
             return cli.notify(args)
-        elif args.command == 'stack':
+        elif args.command == "stack":
             return cli.stack(args)
         elif args.command == "cache":
             if getattr(args, "cache_action", None) == "stats":

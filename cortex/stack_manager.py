@@ -32,13 +32,9 @@ class StackManager:
                 self._stacks = json.load(f)
             return self._stacks
         except FileNotFoundError as e:
-            raise FileNotFoundError(
-                f"Stacks config not found at {self.stacks_file}"
-            ) from e
+            raise FileNotFoundError(f"Stacks config not found at {self.stacks_file}") from e
         except json.JSONDecodeError as e:
-            raise ValueError(
-                f"Invalid JSON in {self.stacks_file}"
-            ) from e
+            raise ValueError(f"Invalid JSON in {self.stacks_file}") from e
 
     def list_stacks(self) -> list[dict[str, Any]]:
         """Get all available stacks"""
