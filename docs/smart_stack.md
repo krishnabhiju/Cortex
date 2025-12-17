@@ -76,8 +76,7 @@ cortex stack ml                  # Install stack
 ## Demo Video
 
 Video walkthrough:  
-https://drive.google.com/file/d/1MkXEWCsVUmbzXbKyKnETfNaOZKZ3mnld/view?usp=sharing
-
+https://drive.google.com/file/d/1WShQDYXhje_RGL1vO_RhGgjcVtuesAEy/view?usp=sharing
 ---
 
 ## Closes

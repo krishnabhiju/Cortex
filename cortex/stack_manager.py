@@ -54,11 +54,33 @@ class StackManager:
         return stack.get("packages", []) if stack else []
 
     def suggest_stack(self, base_stack: str) -> str:
+        """
+        Suggest hardware-appropriate stack variant.
+        For the 'ml' stack, returns 'ml' if a GPU is detected, otherwise 'ml-cpu'.
+        Other stacks are returned unchanged.
+
+        Args:
+        base_stack: The requested stack identifier.
+
+        Returns:
+        The suggested stack identifier (may differ from input).
+        """
         if base_stack == "ml":
             return "ml" if has_nvidia_gpu() else "ml-cpu"
         return base_stack
 
     def describe_stack(self, stack_id: str) -> str:
+        """
+        Generate a formatted description of a stack.
+
+        Args:
+            stack_id: The stack identifier to describe.
+
+        Returns:
+            A multi-line formatted string with stack name, description,
+            packages, tags, and hardware requirements. Returns a not-found
+            message if the stack doesn't exist.
+        """
         stack = self.find_stack(stack_id)
         if not stack:
             return f"Stack '{stack_id}' not found"
