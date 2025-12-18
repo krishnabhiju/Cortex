@@ -277,6 +277,7 @@ class CortexCLI:
         self._print_success(f"\n✅ Stack '{stack['name']}' installed successfully!")
         console.print(f"Installed {len(packages)} packages")
         return 0
+
     # Run system health checks
     def doctor(self):
         from cortex.doctor import SystemDoctor
