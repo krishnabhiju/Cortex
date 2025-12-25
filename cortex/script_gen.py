@@ -29,7 +29,7 @@ STACK_DEPS: dict[str, StackConfig] = {
     "python": {
         "packages": [
             {"name": "python3", "check_command": "python3"},
-            {"name": "python3-venv", "check_command": "python3"},
+            {"name": "python3-venv", "check_command": "python3 -m venv --help"},
         ],
         "verification": "python3 --version",
     },
@@ -92,6 +92,12 @@ class ScriptGenerator:
     """Build installation scripts for supported stacks."""
 
     def __init__(self) -> None:
+        """
+        Initialize the ScriptGenerator.
+
+        Sets up the output directory at ~/cortex/install-scripts and prepares
+        the history tracking file.
+        """
         self.cortex_dir = Path.home() / "cortex" / "install-scripts"
         self.cortex_dir.mkdir(parents=True, exist_ok=True)
         self.history_file = self.cortex_dir / "script_history.yaml"
@@ -279,7 +285,12 @@ fi"""
         self.history_file.write_text(yaml.safe_dump(history, sort_keys=False))
 
     def show_history(self, limit: int = 10) -> None:
-        """Print recent script generation history."""
+        """
+        Display recent script generation history.
+
+        Args:
+            limit: Maximum number of history entries to show (default: 10)
+        """
         try:
             import yaml
         except ImportError:
