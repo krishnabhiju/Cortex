@@ -241,7 +241,6 @@ class TestAskHandlerProviders(unittest.TestCase):
     def test_default_model_ollama(self):
         """Test default model for Ollama."""
         # Test with environment variable
-        import os
 
         # Save and clear any existing OLLAMA_MODEL
         original_model = os.environ.get("OLLAMA_MODEL")
