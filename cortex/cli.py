@@ -1245,8 +1245,12 @@ def main():
     test_parser = script_subs.add_parser("test", help="Test generated script syntax")
     test_parser.add_argument("filename", help="Script file to validate")
     test_parser.add_argument(
-        "--sandbox", action="store_true", default=True, help="Run in sandbox mode (default: True)"
+        "--no-sandbox",
+        dest="sandbox",
+        action="store_false",
+        help="Disable sandbox mode (sandbox is enabled by default)",
     )
+    test_parser.set_defaults(sandbox=True)
 
     # cortex script history
     history_parser = script_subs.add_parser("history", help="Show script generation history")
